@@ -1,0 +1,43 @@
+.button-g {
+    width: 150px;
+    height: 30px;
+    background-color: #1c3962;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    border: 1px solid #000000;
+    box-shadow: 0 0 1px 1px rgba(123, 123, 123, 0.49);
+}
+
+.button-g:hover {
+    opacity: 0.85;
+}
+
+.input-g {
+    height: 32px;
+    width: 345px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 1px 0 1px #b3b3b3;
+    padding-left: 10px;
+}
+
+.error-msg {
+    width: 345px;
+    min-height: 40px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0 10px 0;
+
+    background-color: rgba(157, 5, 0, 0.73);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}

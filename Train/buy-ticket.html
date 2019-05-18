@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Ticket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/global-input.css">
+    <link rel="stylesheet" href="css/buy-ticket.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="javascript/JQuery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.js"></script>
+</head>
+<body>
+<div id="dashboard-content">
+    <div id="header">
+        <div class="logo"><a href=""><img src="image/logo.png" alt="Logo-license"></a></div>
+    </div>
+
+    <div class="close-bar">
+        <a class="home">HOME</a>
+    </div>
+
+    <div class="container-admin" id="container">
+        <div class="left-bar">
+            <ul id="nav">
+                <li><a class="selected" href="index.html">Main Page</a></li>
+                <li><a href="buy-ticket.html">Buy Ticket</a></li>
+                <li><a href="index.html">Ticket Active</a></li>
+                <li><a href="index.html">Add zone</a></li>
+                <li><a href="employees.html">Employees</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="title-zone">
+                <h1>Buy Ticket</h1>
+                <p></p>
+            </div>
+            <div class="input-hidden">
+                <div class="input-zone" id="train-route">
+                    <h3 class="title">Train route</h3>
+                    <form class="choose-route">
+                        <label for="choose-departure">Station departure:</label>
+                        <select data-placeholder="Station departure..." class="chosen" id="choose-departure" required>
+                            <option value=""></option>
+                            <option value="Galati">Galati</option>
+                            <option value="Liesti">Liesti</option>
+                            <option value="Tecuci">Tecuci</option>
+                            <option value="Barlad">Barlad</option>
+                            <option value="Vaslui">Vaslui</option>
+                            <option value="Nicolina">Nicolina</option>
+                            <option value="Iasi">Iasi</option>
+                        </select>
+
+                        <label for="choose-arrive">Station arrive:</label>
+                        <select data-placeholder="Station arrive..." class="chosen" id="choose-arrive" required>
+                            <option value=""></option>
+                            <option value="Galati">Galati</option>
+                            <option value="Liesti">Liesti</option>
+                            <option value="Tecuci">Tecuci</option>
+                            <option value="Barlad">Barlad</option>
+                            <option value="Vaslui">Vaslui</option>
+                            <option value="Nicolina">Nicolina</option>
+                            <option value="Iasi">Iasi</option>
+                        </select>
+                        <label for="start">Departure date:</label>
+                        <input type="date" id="start" name="trip-start"
+                               value="2019-05-22"
+                               min="2019-01-01" max="2019-12-31" required>
+                        <div class="check-zone">
+                            <label class="container-check">
+                                <input type="radio" checked="checked" name="radio" class="check-mark" id="type-license">
+                                Direct route
+                            </label>
+                            <label class="container-check">
+                                <input type="radio" name="radio" class="check-mark" id="type-disertation">
+                                Few train changes
+                            </label>
+                        </div>
+                        <button class="button-g" type="submit">Find</button>
+                    </form>
+                </div>
+
+                <div class="input-zone" id="complete-date" style="display: block">
+                    <h3 class="title">Form date client</h3>
+                    <form class="choose-route" style="margin-top: 50px">
+                        <label for="cnp">CNP:</label>
+                        <input class="input-g" id="cnp" type="text" required>
+                        <label for="legit">Legitimation:</label>
+                        <input class="input-g" id="legit" type="text">
+                        <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
+                        <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="info-zone">
+                <div class="routes-found">
+                    <div class="route-show">
+                        <div class="route-inf"><p class="p-i">Route:</p>
+                            <p>Galati -> Iasi</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Interval:</p>
+                            <p>12:03 -> 15:32</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                            <p>35lei / 10lei</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Nr.Train</p>
+                            <p>IR-1214</p></div>
+                    </div>
+                    <button class="button-g" type="button">Select</button>
+                </div>
+                <div class="routes-found">
+                    <div class="route-show">
+                        <div class="route-inf"><p class="p-i">Route:</p>
+                            <p>Galati -> Iasi</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Interval:</p>
+                            <p>12:03 -> 15:32</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                            <p>35lei / 10lei</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Nr.Train</p>
+                            <p>IR-1214</p></div>
+                    </div>
+                    <button class="button-g" type="button">Select</button>
+                </div>
+                <div class="routes-found">
+                    <div class="route-show">
+                        <div class="route-inf"><p class="p-i">Route:</p>
+                            <p>Galati -> Iasi</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Interval:</p>
+                            <p>12:03 -> 15:32</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                            <p>35lei / 10lei</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Nr.Train</p>
+                            <p>IR-1214</p></div>
+                    </div>
+                    <button class="button-g" type="button">Select</button>
+                </div>
+                <div class="routes-found">
+                    <div class="route-show">
+                        <div class="route-inf"><p class="p-i">Route:</p>
+                            <p>Galati -> Iasi</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Interval:</p>
+                            <p>12:03 -> 15:32</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                            <p>35lei / 10lei</p></div>
+                        <hr>
+                        <div class="route-inf"><p class="p-i">Nr.Train</p>
+                            <p>IR-1214</p></div>
+                    </div>
+                    <button class="button-g" type="button">Select</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascript/responsive-menu.js"></script>
+<script src="javascript/buy-ticket.js"></script>
+</body>
+</html>
+

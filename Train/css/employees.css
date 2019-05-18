@@ -1,0 +1,43 @@
+.container-up-add {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    margin: 30px 0 30px 0;
+}
+
+.container-up-add h3{
+    text-align: center;
+}
+
+.container-up-add #add-emp {
+    width: 375px;
+    height: 500px;
+    margin: 10px 5px 5px 5px;
+    background-color: #d1d1d8;
+    padding: 15px;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.container-up-add #update-emp {
+    width: 385px;
+}
+
+#update-emp .up-tel-emp, #update-emp .up-tr-emp {
+    width: 375px;
+    height: 245px;
+    margin: 10px 5px 5px 5px;
+    background-color: #d1d1d8;
+    padding: 15px;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.chosen {
+    width: 345px;
+}

@@ -1,0 +1,113 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.title-zone {
+    width: 100%;
+    height: 100px;
+}
+
+.input-zone {
+    width: 375px;
+    height: 400px;
+    margin: 10px 5px 5px 5px;
+    padding: 15px;
+    background-color: #d1d1d8;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.info-zone {
+    width: calc(100% - 415px);
+    margin: 10px 5px 5px 5px;
+    background-color: #d1d1d8;
+    padding: 15px;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+}
+
+label {
+    margin: 10px;
+}
+
+.chosen {
+    width: 355px;
+    margin: 20px;
+}
+
+input#start {
+    height: 25px;
+    width: 355px;
+    background-color: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 1px 0 1px #b3b3b3;
+
+    padding-left: 20px;
+}
+
+.check-zone {
+    display: flex;
+    flex-direction: column;
+}
+
+.routes-found {
+    background-color: #4d4d4d;
+    padding: 10px;
+    margin: 10px 0 10px 0;
+
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.route-show {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.route-show .route-inf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.route-show p {
+    color: #fff;
+    width: 130px;
+}
+
+.routes-found hr {
+    color: #333333;
+    margin: 3px 20px 3px 20px;
+}
+
+.routes-found .button-g {
+    margin: 15px 0 0 130px;
+    width: 120px;
+}
+
+
+
+@media screen and (max-width: 725px) {
+    .info-zone {
+        min-width: 300px;
+    }
+}
