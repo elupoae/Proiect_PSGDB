@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trains</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/format-page.css">
+    <link rel="stylesheet" href="css/global-input.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="javascript/JQuery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.js"></script>
+</head>
+<body>
+<div id="dashboard-content">
+    <div id="header">
+        <div class="logo"><a href=""><img src="image/logo.png" alt="Logo-license"></a></div>
+    </div>
+
+    <div class="close-bar">
+        <a class="home">HOME</a>
+    </div>
+
+    <div class="container-admin" id="container">
+        <div class="left-bar">
+            <ul id="nav">
+                <li><a class="selected" href="index.html">Main Page</a></li>
+                <li><a href="buy-ticket.html">Buy Ticket</a></li>
+                <li><a href="employees.html">Employees</a></li>
+                <li><a href="trains.html">Trains</a></li>
+                <li><a href="stations.html">Stations</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h1>Trains</h1>
+            <p class="sub-title">You can update, remove or add train.</p>
+            <hr>
+
+            <div class="form-zone">
+                <div class="add-zone">
+                    <div class="add-trains">
+                        <h3 class="title">Add trains</h3>
+                        <form class="choose-route">
+                            <label for="add-tr">ID train:</label>
+                            <input class="input-g" id="add-tr" required>
+
+                            <label for="ch-dep-tr">Station departure:</label>
+                            <select data-placeholder="Station departure..." class="chosen" id="ch-dep-tr" required>
+                                <option value=""></option>
+                                <option value="Galati">Galati</option>
+                                <option value="Liesti">Liesti</option>
+                                <option value="Tecuci">Tecuci</option>
+                                <option value="Barlad">Barlad</option>
+                                <option value="Vaslui">Vaslui</option>
+                                <option value="Nicolina">Nicolina</option>
+                                <option value="Iasi">Iasi</option>
+                            </select>
+
+                            <label for="ch-arr-tr">Station arrive:</label>
+                            <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-tr" required>
+                                <option value=""></option>
+                                <option value="Galati">Galati</option>
+                                <option value="Liesti">Liesti</option>
+                                <option value="Tecuci">Tecuci</option>
+                                <option value="Barlad">Barlad</option>
+                                <option value="Vaslui">Vaslui</option>
+                                <option value="Nicolina">Nicolina</option>
+                                <option value="Iasi">Iasi</option>
+                            </select>
+
+                            <label for="add-time">Time duration:</label>
+                            <input class="input-g" id="add-time" required>
+
+                            <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
+                            <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
+                        </form>
+                    </div>
+                    <div class="add-carloads">
+                        <h3 class="title">Add carloads</h3>
+                        <form class="choose-route">
+                            <label for="ch-carload">Id train:</label>
+                            <select data-placeholder="Select ID train..." class="chosen" id="ch-carload" required>
+                                <option value=""></option>
+                                <option value="IR-1842">IR-1842</option>
+                                <option value="IR-1846">IR-1846</option>
+                                <option value="R-1423">R-1423</option>
+                                <option value="IR-1842">IR-1842</option>
+                                <option value="R-1423">R-1423</option>
+                                <option value="R-1423">R-1423</option>
+                            </select>
+
+                            <label for="type-car">Type carload:</label>
+                            <input class="input-g" id="type-car" required>
+
+                            <label for="nr-seats">Number of seats:</label>
+                            <input class="input-g" id="nr-seats" required type="number">
+
+                            <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
+                            <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="update-zone">
+                    <div class="update-status">
+                        <h3 class="title">Update status</h3>
+                        <form class="choose-route">
+                            <label for="ch-carload">Id train:</label>
+                            <select data-placeholder="Select ID train..." class="chosen" id="ch-status" required>
+                                <option value=""></option>
+                                <option value="IR-1842">IR-1842</option>
+                                <option value="IR-1846">IR-1846</option>
+                                <option value="R-1423">R-1423</option>
+                                <option value="IR-1842">IR-1842</option>
+                                <option value="R-1423">R-1423</option>
+                                <option value="R-1423">R-1423</option>
+                            </select>
+
+                            <label for="status">Status:</label>
+                            <input class="input-g" id="status" required>
+                            <div class="error-msg">Error: update fail.</div>
+                            <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-table-select">
+                <button class="button-g-table" type="button">Trains</button>
+                <button class="button-g-table" type="button">Carloads</button>
+            </div>
+
+            <div class="table" style="overflow-x:auto; display: block;">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Carload</th>
+                        <th>Number seats</th>
+                        <th>Number employees</th>
+                        <th>Status</th>
+                        <th>Status time</th>
+                        <th>Option</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="column">1</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">4</td>
+                        <td class="column">230</td>
+                        <td class="column">6</td>
+                        <td class="column">ACTIVE</td>
+                        <td class="column">-10</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">2</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">4</td>
+                        <td class="column">230</td>
+                        <td class="column">6</td>
+                        <td class="column">ACTIVE</td>
+                        <td class="column">-10</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">3</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">4</td>
+                        <td class="column">230</td>
+                        <td class="column">6</td>
+                        <td class="column">ACTIVE</td>
+                        <td class="column">-10</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">4</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">4</td>
+                        <td class="column">230</td>
+                        <td class="column">6</td>
+                        <td class="column">ACTIVE</td>
+                        <td class="column">-10</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+            </div>
+            <div class="table" style="overflow-x:auto; display: none;">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID train</th>
+                        <th>Class type</th>
+                        <th>Number seats</th>
+                        <th>Option</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="column">1</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">1</td>
+                        <td class="column">230</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">2</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">1</td>
+                        <td class="column">230</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">3</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">1</td>
+                        <td class="column">230</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">4</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">1</td>
+                        <td class="column">230</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">5</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">1</td>
+                        <td class="column">230</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    <tr>
+                        <td class="column">6</td>
+                        <td class="column">TR-1834</td>
+                        <td class="column">1</td>
+                        <td class="column">230</td>
+                        <td class="column-delete">DELETE</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascript/responsive-menu.js"></script>
+<script src="javascript/chosen.js"></script>
+<script src="javascript/trains.js"></script>
+</body>
+</html>

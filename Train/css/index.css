@@ -1,0 +1,61 @@
+.detailed-network {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+
+}
+
+.detailed-network .title {
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+}
+
+.detailed-network .member-info-network {
+    width: 120px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.detailed-network .info {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: #1B3058;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.detailed-network .info p {
+    padding-top: 28px;
+}
+
+.railway-map-rom img {
+    width: 100%;
+    height: auto;
+}
+
+
+#all-trains {
+    background-color: #4285F4;
+}
+
+#all-routes {
+    background-color: #0F9D58;
+}
+
+#all-stations {
+    background-color: #F4B400;
+}
+
+#all-employees {
+    background-color: blueviolet;
+}
+
+#trans-delay {
+    background-color: #DB4437;
+}

@@ -58,6 +58,11 @@ div#container {
     color: #000;
 }
 
+.content .sub-title {
+    color: #5b5b5b;
+    margin-bottom: 3px;
+}
+
 .content .box {
     margin-top: 15px;
 }

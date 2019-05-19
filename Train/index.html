@@ -1,16 +1,21 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin dashboard</title>
+    <title>Buy Ticket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <script src="javascript/JQuery.js"></script>
-    <script src="javascript/responsive-menu.js"></script>
+    <link rel="stylesheet" href="css/format-page.css">
+    <link rel="stylesheet" href="css/global-input.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="javascript/JQuery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.js"></script>
 </head>
 <body>
 <div id="dashboard-content">
     <div id="header">
-        <div class="logo"><a href="#"><img src="image/logo.png" alt="Logo-license"></a></div>
+        <div class="logo"><a href=""><img src="image/logo.png" alt="Logo-license"></a></div>
     </div>
 
     <div class="close-bar">
@@ -18,26 +23,62 @@
     </div>
 
     <div class="container-admin" id="container">
-
         <div class="left-bar">
             <ul id="nav">
                 <li><a class="selected" href="index.html">Main Page</a></li>
                 <li><a href="buy-ticket.html">Buy Ticket</a></li>
-                <li><a href="index.html">Ticket Active</a></li>
-                <li><a href="index.html">Add zone</a></li>
                 <li><a href="employees.html">Employees</a></li>
+                <li><a href="trains.html">Trains</a></li>
+                <li><a href="stations.html">Stations</a></li>
             </ul>
         </div>
         <div class="content">
-            <h1>Main page</h1>
-            <p>information stuff</p>
-
-            <div id="news-container">
-
+            <h1>Util information</h1>
+            <p class="sub-title">Information about current status of trains, stations & employees</p>
+            <hr>
+            <br>
+            <div class="title" style="text-align: center"><h4>DETAILED NETWORK RAILS</h4></div>
+            <br>
+            <div class="detailed-network">
+                <div class="member-info-network">
+                    <div class="title">Trains</div>
+                    <div class="info" id="all-trains">
+                        <p>5</p>
+                    </div>
+                </div>
+                <div class="member-info-network">
+                    <div class="title">Stations</div>
+                    <div class="info" id="all-stations">
+                        <p>6</p>
+                    </div>
+                </div>
+                <div class="member-info-network">
+                    <div class="title">Routes</div>
+                    <div class="info" id="all-routes">
+                        <p>10</p>
+                    </div>
+                </div>
+                <div class="member-info-network">
+                    <div class="title">Employees</div>
+                    <div class="info" id="all-employees">
+                        <p>10</p>
+                    </div>
+                </div>
+                <div class="member-info-network">
+                    <div class="title">Trains in delay</div>
+                    <div class="info" id="trans-delay">
+                        <p>6</p>
+                    </div>
+                </div>
             </div>
+            <br>
+
+            <div class="railway-map-rom"><img src="image/Railway_map_romania.png" alt="railway-map"></div>
+
         </div>
     </div>
 </div>
+<script src="javascript/responsive-menu.js"></script>
+<script src="javascript/chosen.js"></script>
 </body>
 </html>
-
