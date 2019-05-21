@@ -1,12 +1,10 @@
 <?php
 
-
 class Database
 {
-    const HOST = "jdbc:oracle:thin:@localhost:1521:XE";
+    const HOST = "localhost/orcl12";
     const USER = "EDUARD";
     const PASSWORD = "EDUARD";
-    const DATABASE = "maxlock";
     private static $conn = null;
 
     public static function setConnection()
@@ -16,9 +14,6 @@ class Database
             $m = oci_error();
             echo $m['message'], "\n";
             exit;
-        }
-        else {
-            print "Connected to Oracle!";
         }
     }
 
