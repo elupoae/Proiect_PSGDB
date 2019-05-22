@@ -19,6 +19,8 @@ class Database
 
     public static function getConnection()
     {
-        return self::$conn;
+        return oci_connect(self::USER, self::PASSWORD, self::HOST);
+//        return self::$conn;
+
     }
 }
