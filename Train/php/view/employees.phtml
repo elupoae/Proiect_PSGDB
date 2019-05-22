@@ -56,9 +56,9 @@
                         <label for="choose-new-train">Select ID train:</label>
                         <select data-placeholder="Select ID train..." class="chosen" id="choose-new-train" required>
                             <option value=""></option>
-                            <?php foreach ($this->data['trains'] as $item)
-                            { ?>
-                                <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                            <?php foreach ($this->data['trains'] as $item) { ?>
+                                <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>
+                                    -<?= $item['id_tren'] ?></option>
                             <?php } ?>
                         </select>
                         <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
@@ -72,8 +72,7 @@
                             <label for="choose-emp1">Select employee</label>
                             <select data-placeholder="Select employee..." class="chosen" id="choose-emp1" required>
                                 <option value=""></option>
-                                <?php foreach ($this->data['angajati'] as $item)
-                                { ?>
+                                <?php foreach ($this->data['angajati'] as $item) { ?>
                                     <option value="<?= $item['id_angajat'] ?>"><?= $item['nume_angajat'] ?></option>
                                 <?php } ?>
                             </select>
@@ -89,17 +88,16 @@
                             <label for="choose-emp2">Select employee</label>
                             <select data-placeholder="Select employee..." class="chosen" id="choose-emp2" required>
                                 <option value=""></option>
-                                <?php foreach ($this->data['angajati'] as $item)
-                                { ?>
+                                <?php foreach ($this->data['angajati'] as $item) { ?>
                                     <option value="<?= $item['id_angajat'] ?>"><?= $item['nume_angajat'] ?></option>
                                 <?php } ?>
                             </select>
                             <label for="choose-emp-train">Select train</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="choose-emp-train" required>
                                 <option value=""></option>
-                                <?php foreach ($this->data['trains'] as $item)
-                                { ?>
-                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                                <?php foreach ($this->data['trains'] as $item) { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>
+                                        -<?= $item['id_tren'] ?></option>
                                 <?php } ?>
                             </select>
                             <div class="error-msg">Error: 404: update fail!</div>
@@ -108,35 +106,36 @@
                     </div>
                 </div>
             </div>
-            <div class="table" style="overflow-x:auto;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Train</th>
-                        <th>Jobs</th>
-                        <th>Option</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($this->data['angajati'] as $item)
-                    { ?>
+            <div class="overflow-y" style="overflow: auto; height: 400px">
+                <div class="table" style="overflow-x:auto;">
+                    <table>
+                        <thead>
                         <tr>
-                            <td class="column"><?= $item['id_angajat'] ?></td>
-                            <td class="column"><?= $item['nume_angajat'] ?></td>
-                            <td class="column"><?= $item['phone'] ?></td>
-                            <td class="column"><?= $item['tren'] ?></td>
-                            <td class="column"><?= $item['job'] ?></td>
-                            <td class="column-delete">DELETE</td>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Train</th>
+                            <th>Jobs</th>
+                            <th>Option</th>
                         </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-                <br>
-                <br>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($this->data['angajati'] as $item) { ?>
+                            <tr>
+                                <td class="column"><?= $item['id_angajat'] ?></td>
+                                <td class="column"><?= $item['nume_angajat'] ?></td>
+                                <td class="column"><?= $item['phone'] ?></td>
+                                <td class="column"><?= $item['tren'] ?></td>
+                                <td class="column"><?= $item['job'] ?></td>
+                                <td class="column-delete">DELETE</td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <br>
+            <br>
         </div>
     </div>
 </div>

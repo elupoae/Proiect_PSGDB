@@ -15,12 +15,18 @@ $(document).ready(function () {
     $("#ch-arr-tr").chosen({no_results_text: "Oops, nothing found!"});
     $("#ch-carload").chosen({no_results_text: "Oops, nothing found!"});
     $("#ch-status").chosen({no_results_text: "Oops, nothing found!"});
+    $("#type-car").chosen({no_results_text: "Oops, nothing found!"});
+    $("#status").chosen({no_results_text: "Oops, nothing found!"});
+
+
 
     // stations & routes page
     $("#ch-up-rt").chosen({no_results_text: "Oops, nothing found!"});
     $("#ch-up-st").chosen({no_results_text: "Oops, nothing found!"});
     $("#ch-arr-st").chosen({no_results_text: "Oops, nothing found!"});
     $("#ch-dep-st").chosen({no_results_text: "Oops, nothing found!"});
+    $("#id-train-st").chosen({no_results_text: "Oops, nothing found!"});
+
 });
 
 

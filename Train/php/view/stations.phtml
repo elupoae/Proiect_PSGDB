@@ -43,8 +43,14 @@
                     <div class="add-routes">
                         <h3 class="title">Add route</h3>
                         <form class="choose-route">
-                            <label for="id-train">ID train:</label>
-                            <input class="input-g" id="id-train" required>
+                            <label for="id-train-st">ID train:</label>
+                            <select data-placeholder="Select ID train..." class="chosen" id="id-train-st" required>
+                                <option value=""></option>
+                                <?php foreach ($this->data['trains'] as $item) { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>
+                                        -<?= $item['id_tren'] ?></option>
+                                <?php } ?>
+                            </select>
 
                             <label for="ch-dep-st">Station departure:</label>
                             <select data-placeholder="Station departure..." class="chosen" id="ch-dep-st" required>
@@ -158,62 +164,58 @@
                 <button class="button-g-table" type="button">Stations</button>
                 <button class="button-g-table" type="button">Routes</button>
             </div>
-            <div class="table" style="overflow-x:auto; display: block;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name station</th>
-                        <th>Waiting time</th>
-                        <th>Option</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                        print '<tr>';
-                        foreach ($row as $item) {
-                            print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
-                        }
-                        print '<td class="column-delete">DELETE</td>';
-                        print '</tr>';
-                    }
-                    ?>
-                    </tbody>
-                </table>
-                <br>
-                <br>
+            <div class="overflow-y" style="overflow: auto; height: 400px; display: block;">
+                <div class="table" style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name station</th>
+                            <th>Waiting time</th>
+                            <th>Option</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table" style="overflow-x:auto; display: none;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>ID train</th>
-                        <th>Departure</th>
-                        <th>Hour departure</th>
-                        <th>Arrival</th>
-                        <th>Hour arrival</th>
-                        <th>Distance</th>
-                        <th>Option</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="column">1</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">Galati</td>
-                        <td class="column">6:40</td>
-                        <td class="column">Iasi</td>
-                        <td class="column">10:44</td>
-                        <td class="column">250</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <br>
-                <br>
+            <br>
+            <br>
+            <div class="overflow-y" style="overflow: auto; height: 400px; display: none;">
+                <div class="table" style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ID train</th>
+                            <th>Departure</th>
+                            <th>Hour departure</th>
+                            <th>Arrival</th>
+                            <th>Hour arrival</th>
+                            <th>Distance</th>
+                            <th>Option</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="column">1</td>
+                            <td class="column">TR-1834</td>
+                            <td class="column">Galati</td>
+                            <td class="column">6:40</td>
+                            <td class="column">Iasi</td>
+                            <td class="column">10:44</td>
+                            <td class="column">250</td>
+                            <td class="column-delete">DELETE</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <br>
+            <br>
         </div>
     </div>
 </div>

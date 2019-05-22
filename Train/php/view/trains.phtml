@@ -46,8 +46,7 @@
                             <select data-placeholder="Station departure..." class="chosen" id="ch-dep-tr" required>
                                 <option value=""></option>
                                 <?php
-                                foreach ($this->data['stations'] as $item)
-                                {
+                                foreach ($this->data['stations'] as $item) {
                                     ?>
                                     <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
 
@@ -58,8 +57,7 @@
                             <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-tr" required>
                                 <option value=""></option>
                                 <?php
-                                foreach ($this->data['stations'] as $item)
-                                {
+                                foreach ($this->data['stations'] as $item) {
                                     ?>
                                     <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
 
@@ -79,14 +77,18 @@
                             <label for="ch-carload">Id train:</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="ch-carload" required>
                                 <option value=""></option>
-                                <?php foreach ($this->data['trains'] as $item)
-                                { ?>
-                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                                <?php foreach ($this->data['trains'] as $item) { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>
+                                        -<?= $item['id_tren'] ?></option>
                                 <?php } ?>
                             </select>
 
                             <label for="type-car">Type carload:</label>
-                            <input class="input-g" id="type-car" required>
+                            <select data-placeholder="Select class carload..." class="chosen" id="type-car" required>
+                                <option value=""></option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                            </select>
 
                             <label for="nr-seats">Number of seats:</label>
                             <input class="input-g" id="nr-seats" required type="number">
@@ -103,14 +105,22 @@
                             <label for="ch-carload">Id train:</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="ch-status" required>
                                 <option value=""></option>
-                                <?php foreach ($this->data['trains'] as $item)
-                                { ?>
-                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                                <?php foreach ($this->data['trains'] as $item) { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>
+                                        -<?= $item['id_tren'] ?></option>
                                 <?php } ?>
                             </select>
 
                             <label for="status">Status:</label>
-                            <input class="input-g" id="status" required>
+                            <select data-placeholder="Select status train..." class="chosen" id="status" required>
+                                <option value=""></option>
+                                <option value="">Intarziat</option>
+                                <option value="">Fara Intarziere</option>
+                            </select>
+
+                            <label for="nr-status">Number of minutes status:</label>
+                            <input class="input-g" id="nr-status" required type="number">
+
                             <div class="error-msg">Error: update fail.</div>
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
                         </form>
@@ -123,42 +133,45 @@
                 <button class="button-g-table" type="button">Carloads</button>
             </div>
 
-            <div class="table" style="overflow-x:auto; display: block;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Carload</th>
-                        <th>Number seats</th>
-                        <th>Number employees</th>
-                        <th>Status</th>
-                        <th>Status time</th>
-                        <th>Last station</th>
-                        <th>Option</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($this->data['trains'] as $item)
-                    { ?>
+            <div class="overflow-y" style="overflow: auto; height: 400px; display: block;">
+                <div class="table" style="overflow-x:auto;">
+                    <table>
+                        <thead>
                         <tr>
-                            <td class="column"><?= $item['id_tren'] ?></td>
-                            <td class="column"><?= $item['type'] ?></td>
-                            <td class="column"><?= $item['nr_vagoane'] ?></td>
-                            <td class="column"><?= $item['nr_locuri'] ?></td>
-                            <td class="column"><?= $item['nr_angajati'] ?></td>
-                            <td class="column"><?= $item['status'] ?></td>
-                            <td class="column"><?= $item['status_time'] ?></td>
-                            <td class="column"><?= $item['last_station'] ?></td>
-                            <td class="column-delete">DELETE</td>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Carload</th>
+                            <th>Number seats</th>
+                            <th>Number employees</th>
+                            <th>Status</th>
+                            <th>Status time</th>
+                            <th>Last station</th>
+                            <th>Option</th>
                         </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-                <br>
-                <br>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($this->data['trains'] as $item) { ?>
+                            <tr>
+                                <td class="column"><?= $item['id_tren'] ?></td>
+                                <td class="column"><?= $item['type'] ?></td>
+                                <td class="column"><?= $item['nr_vagoane'] ?></td>
+                                <td class="column"><?= $item['nr_locuri'] ?></td>
+                                <td class="column"><?= $item['nr_angajati'] ?></td>
+                                <td class="column"><?= $item['status'] ?></td>
+                                <td class="column"><?= $item['status_time'] ?></td>
+                                <td class="column"><?= $item['last_station'] ?></td>
+                                <td class="column-delete">DELETE</td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table" style="overflow-x:auto; display: none;">
+            <br>
+            <br>
+            <div class="overflow-y" style="overflow: auto; height: 400px; display: none;">
+
+            <div class="table" style="overflow-x:auto;">
                 <table>
                     <thead>
                     <tr>
@@ -170,8 +183,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($this->data['vagoane'] as $item)
-                    { ?>
+                    <?php foreach ($this->data['vagoane'] as $item) { ?>
                         <tr>
                             <td class="column"><?= $item['id_vagon'] ?></td>
                             <td class="column"><?= $item['id_tren'] ?></td>
@@ -182,9 +194,10 @@
                     <?php } ?>
                     </tbody>
                 </table>
-                <br>
-                <br>
             </div>
+            </div>
+            <br>
+            <br>
         </div>
     </div>
 </div>
