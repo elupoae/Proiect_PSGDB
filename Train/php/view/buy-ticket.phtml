@@ -39,11 +39,11 @@
                 <hr>
             </div>
             <div class="input-hidden">
-                <div class="input-zone" id="train-route" style="display: block">
+                <div class="input-zone" id="train-route" style="display: <?= isset($this->data['select_date']) ? "none" : "block"?>">
                     <h3 class="title">Train route</h3>
-                    <form class="choose-route">
+                    <form class="choose-route" action="/home/buy_ticket" method="post">
                         <label for="choose-departure">Station departure:</label>
-                        <select data-placeholder="Station departure..." class="chosen" id="choose-departure" required>
+                        <select name="plecare" data-placeholder="Station departure..." class="chosen" id="choose-departure" required>
                             <option value=""></option>
                             <?php
                             foreach ($this->data['stations'] as $item)
@@ -55,7 +55,7 @@
                         </select>
 
                         <label for="choose-arrive">Station arrive:</label>
-                        <select data-placeholder="Station arrive..." class="chosen" id="choose-arrive" required>
+                        <select name="sosire" data-placeholder="Station arrive..." class="chosen" id="choose-arrive" required>
                             <option value=""></option>
                             <?php
                             foreach ($this->data['stations'] as $item)
@@ -66,7 +66,7 @@
                             <?php } ?>
                         </select>
                         <label for="start">Departure date:</label>
-                        <input type="date" id="start" name="trip-start"
+                        <input type="date" id="start" name="date"
                                value="2019-05-22"
                                min="2019-01-01" max="2019-12-31" required>
 <!--                        <div class="check-zone">-->
@@ -83,13 +83,13 @@
                     </form>
                 </div>
 
-                <div class="input-zone" id="complete-date" style="display: none">
+                <div class="input-zone" id="complete-date" style="display: <?= isset($this->data['select_date']) ? "block" : "none"?>">
                     <h3 class="title">Form date client</h3>
-                    <form class="choose-route" style="margin-top: 50px">
+                    <form class="choose-route" style="margin-top: 50px" action="/ticket/new/<?= $this->data['select_date'] ?>" method="post">
                         <label for="cnp">CNP:</label>
-                        <input class="input-g" id="cnp" type="text" required>
+                        <input name="cnp" class="input-g" id="cnp" type="text" required>
                         <label for="legit">Legitimation:</label>
-                        <input class="input-g" id="legit" type="text">
+                        <input name="legitimatie" class="input-g" id="legit" type="text">
                         <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
                         <div class="button-zone" style="display: flex; flex-wrap: wrap; justify-content: space-around">
                             <button class="button-g" type="submit" id="back-button">Back</button>
@@ -98,12 +98,13 @@
                     </form>
                 </div>
             </div>
-            <div class="info-zone">
+            <div class="info-zone" style="overflow: auto; height: 500px;">
                 <div class="all-route-found" id="all-route-found">
                     <?php
                     foreach ($this->data['routes'] as $item)
                     {
                         ?>
+                        <form action="/home/buy_ticket/<?=$item['id_tren']?>" method="get">
                         <div class="routes-found">
                             <div class="route-show">
                                 <div class="route-inf"><p class="p-i">Route:</p>
@@ -113,14 +114,14 @@
                                     <p><?= $item['ora_plecare'] ?> -> <?= $item['ora_sosire'] ?></p></div>
                                 <hr>
                                 <div class="route-inf"><p class="p-i">Price:</p>
-                                    <p><?= $item['pret'] ?></p></div>
+                                    <p><?= $item['pret'] ?> LEI</p></div>
                                 <hr>
                                 <div class="route-inf"><p class="p-i">Nr.Train</p>
                                     <p><?= $item['type'] ?>-<?= $item['id_tren'] ?></p></div>
                             </div>
-                            <button class="button-g" type="button">Select</button>
+                            <button class="button-g" type="submit">Select</button>
                         </div>
-
+                        </form>
                     <?php } ?>
                 </div>
             </div>

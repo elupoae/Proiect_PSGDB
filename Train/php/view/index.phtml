@@ -44,31 +44,31 @@
                 <div class="member-info-network">
                     <div class="title">Trains</div>
                     <div class="info" id="all-trains">
-                        <p>5</p>
+                        <p><?= isset($this->data['train']) ? $this->data['train'] : '-' ?></p>
                     </div>
                 </div>
                 <div class="member-info-network">
                     <div class="title">Stations</div>
                     <div class="info" id="all-stations">
-                        <p>6</p>
+                        <p><?= isset($this->data['station']) ? $this->data['station'] : '-' ?></p>
                     </div>
                 </div>
                 <div class="member-info-network">
                     <div class="title">Routes</div>
                     <div class="info" id="all-routes">
-                        <p>10</p>
+                        <p><?= isset($this->data['route']) ? $this->data['route'] : '-' ?></p>
                     </div>
                 </div>
                 <div class="member-info-network">
                     <div class="title">Employees</div>
                     <div class="info" id="all-employees">
-                        <p>10</p>
+                        <p><?= isset($this->data['employee']) ? $this->data['employee'] : '-' ?></p>
                     </div>
                 </div>
                 <div class="member-info-network">
                     <div class="title">Trains in delay</div>
                     <div class="info" id="trans-delay">
-                        <p>6</p>
+                        <p><?= isset($this->data['delay']) ? $this->data['delay'] : '-' ?></p>
                     </div>
                 </div>
             </div>

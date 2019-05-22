@@ -33,7 +33,7 @@
                 <li><a href="/home/stations">Stations</a></li>
             </ul>
         </div>
-        <div class="content">
+        <div class="content" style="width: calc(100% - 200px)">
             <h1>Stations & routes</h1>
             <p class="sub-title">You can update, remove or add stations or routes.</p>
             <hr>
@@ -42,42 +42,49 @@
                 <div class="add-zone">
                     <div class="add-routes">
                         <h3 class="title">Add route</h3>
-                        <form class="choose-route">
-                            <label for="id-train">ID train:</label>
-                            <input class="input-g" id="id-train" required>
+                        <form class="choose-route" action="/station/add_route" method="post">
+                            <label for="id-train-st">ID train:</label>
+                            <select name="id_train" data-placeholder="Select Id train..." class="chosen"
+                                    id="id-train-st" required>
+                                <option value=""></option>
+                                <?php foreach ($this->data['trains'] as $item) { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>
+                                        -<?= $item['id_tren'] ?></option>
+                                <?php } ?>
+                            </select>
 
                             <label for="ch-dep-st">Station departure:</label>
-                            <select data-placeholder="Station departure..." class="chosen" id="ch-dep-st" required>
+                            <select name="plecare" data-placeholder="Station departure..." class="chosen" id="ch-dep-st"
+                                    required>
                                 <option value=""></option>
                                 <?php
-                                foreach ($this->data['stations'] as $item)
-                                {
+                                foreach ($this->data['stations'] as $item) {
                                     ?>
                                     <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
 
                                 <?php } ?>
                             </select>
-
-                            <label for="time-dep">Hour departure:</label>
-                            <input class="input-g" id="time-dep" required>
+                            <!---->
+                            <!--                            <label for="time-dep">Hour departure:</label>-->
+                            <!--                            <input name="ora_plecare" class="input-g" id="time-dep" required>-->
 
                             <label for="ch-arr-st">Station arrive:</label>
-                            <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-st" required>
+                            <select name="destinatie" data-placeholder="Station arrive..." class="chosen" id="ch-arr-st"
+                                    required>
                                 <option value=""></option>
                                 <?php
-                                foreach ($this->data['stations'] as $item)
-                                {
+                                foreach ($this->data['stations'] as $item) {
                                     ?>
                                     <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
 
                                 <?php } ?>
                             </select>
 
-                            <label for="time-arr">Hour arrival:</label>
-                            <input class="input-g" id="time-arr" required>
+                            <!--                            <label for="time-arr">Hour arrival:</label>-->
+                            <!--                            <input name="ora_sosire" class="input-g" id="time-arr" required>-->
 
                             <label for="distance">Distance:</label>
-                            <input class="input-g" id="distance" required>
+                            <input name="distanta" class="input-g" id="distance" required>
 
                             <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
@@ -85,14 +92,14 @@
                     </div>
                     <div class="add-stations">
                         <h3 class="title">Add station</h3>
-                        <form class="choose-route">
+                        <form class="choose-route" action="/station/add_station" method="post">
                             <label for="name-st">Name station:</label>
-                            <input class="input-g" id="name-st" required>
+                            <input name="name" class="input-g" id="name-st" required>
 
                             <label for="wt-time">Waiting time:</label>
-                            <input class="input-g" id="wt-time" required>
+                            <input name="time" class="input-g" id="wt-time" required>
 
-                            <div class="error-msg">Error: new add fail.</div>
+                            <!--                            <div class="error-msg">Error: new add fail.</div>-->
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
                         </form>
                     </div>
@@ -100,13 +107,13 @@
                 <div class="update-zone">
                     <div class="update-routes">
                         <h3 class="title">Update route</h3>
-                        <form class="choose-route">
+                        <form class="choose-route" action="/station/update_route" method="post">
                             <label for="ch-up-rt">Id route:</label>
-                            <select data-placeholder="Select ID route..." class="chosen" id="ch-up-rt" required>
+                            <select name="id_route" data-placeholder="Select ID route..." class="chosen" id="ch-up-rt"
+                                    required>
                                 <option value=""></option>
                                 <?php
-                                foreach ($this->data['routes'] as $item)
-                                {
+                                foreach ($this->data['routes'] as $item) {
                                     ?>
                                     <option value="<?= $item['id_route'] ?>"><?= $item['id_route'] ?></option>
 
@@ -114,36 +121,33 @@
                             </select>
 
                             <label for="time-up-dep">Hour departure:</label>
-                            <input class="input-g" id="time-up-dep" required>
+                            <input name="ora_plecare" class="input-g" id="time-up-dep" required>
 
                             <label for="time-up-arr">Hour arrival:</label>
-                            <input class="input-g" id="time-up-arr" required>
+                            <input name="ora_sosire" class="input-g" id="time-up-arr" required>
 
-                            <label for="distance-up">Distance:</label>
-                            <input class="input-g" id="distance-up" required>
-
-                            <div class="error-msg">Error: update fail.</div>
+                            <!--                            <div class="error-msg">Error: update fail.</div>-->
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
                         </form>
                     </div>
                     <div class="update-stations">
                         <h3 class="title">Update stations</h3>
-                        <form class="choose-route">
+                        <form class="choose-route" action="/station/update_station" method="post">
                             <label for="ch-up-st">Station arrive:</label>
-                            <select data-placeholder="Station update..." class="chosen" id="ch-up-st" required>
+                            <select name="id_statie" data-placeholder="Station update..." class="chosen" id="ch-up-st"
+                                    required>
                                 <option value=""></option>
                                 <?php
-                                foreach ($this->data['stations'] as $item)
-                                {
+                                foreach ($this->data['stations'] as $item) {
                                     ?>
-                                    <option value="<?=$item['id_statie']?>"><?= $item['nume_statie'] ?></option>
+                                    <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
 
                                 <?php } ?>
                             </select>
                             <label for="time-up">New-time:</label>
-                            <input class="input-g" id="time-up" required>
+                            <input name="time" class="input-g" id="time-up" required>
 
-                            <div class="error-msg">Error: update fail.</div>
+                            <!--                            <div class="error-msg">Error: update fail.</div>-->
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
                         </form>
                     </div>
@@ -154,68 +158,71 @@
                 <button class="button-g-table" type="button">Stations</button>
                 <button class="button-g-table" type="button">Routes</button>
             </div>
-            <div class="table" style="overflow-x:auto; display: block;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name station</th>
-                        <th>Waiting time</th>
-                        <th>Option</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach ($this->data['stations'] as $item)
-                    {
-                        ?>
+            <div class="overflow-y" style="overflow: auto; height: 400px; display: block;">
+                <div class="table" style="overflow-x:auto;">
+                    <table>
+                        <thead>
                         <tr>
-                            <td class="column"><?= $item['id_statie'] ?></td>
-                            <td class="column"><?= $item['nume_statie'] ?></td>
-                            <td class="column"><?= $item['timp_asteptare'] ?></td>
-                            <td class="column-delete">DELETE</td>
+                            <th>ID</th>
+                            <th>Name station</th>
+                            <th>Waiting time</th>
+                            <th>Option</th>
                         </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-                <br>
-                <br>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($this->data['stations'] as $item) {
+                            ?>
+                            <tr>
+                                <td class="column"><?= $item['id_statie'] ?></td>
+                                <td class="column"><?= $item['nume_statie'] ?></td>
+                                <td class="column"><?= $item['timp_asteptare'] ?></td>
+                                <td class="column-delete">DELETE</td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table" style="overflow-x:auto; display: none;">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>ID train</th>
-                        <th>Departure</th>
-                        <th>Hour departure</th>
-                        <th>Arrival</th>
-                        <th>Hour arrival</th>
-                        <th>Distance</th>
-                        <th>Option</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach ($this->data['routes'] as $item)
-                    {
-                        ?>
+            <br>
+            <br>
+
+            <div class="overflow-y" style="overflow: auto; height: 400px; display: none">
+                <div class="table" style="overflow-x:auto;">
+                    <table>
+                        <thead>
                         <tr>
-                            <td class="column"><?= $item['id_route'] ?></td>
-                            <td class="column"><?= $item['id_tren'] ?></td>
-                            <td class="column"><?= $item['plecare'] ?></td>
-                            <td class="column"><?= $item['ora_plecare'] ?></td>
-                            <td class="column"><?= $item['destinatie'] ?></td>
-                            <td class="column"><?= $item['ora_sosire'] ?></td>
-                            <td class="column"><?= $item['distanta'] ?></td>
-                            <td class="column-delete">DELETE</td>
+                            <th>ID</th>
+                            <th>ID train</th>
+                            <th>Departure</th>
+                            <th>Hour departure</th>
+                            <th>Arrival</th>
+                            <th>Hour arrival</th>
+                            <th>Distance</th>
+                            <th>Option</th>
                         </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-                <br>
-                <br>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($this->data['routes'] as $item) {
+                            ?>
+                            <tr>
+                                <td class="column"><?= $item['id_route'] ?></td>
+                                <td class="column"><?= $item['id_tren'] ?></td>
+                                <td class="column"><?= $item['plecare'] ?></td>
+                                <td class="column"><?= $item['ora_plecare'] ?></td>
+                                <td class="column"><?= $item['destinatie'] ?></td>
+                                <td class="column"><?= $item['ora_sosire'] ?></td>
+                                <td class="column"><?= $item['distanta'] ?></td>
+                                <td class="column-delete">DELETE</td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <br>
+            <br>
         </div>
     </div>
 </div>

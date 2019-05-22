@@ -1,4 +1,4 @@
-let classTables = document.getElementsByClassName('table');
+let classTables = document.getElementsByClassName('overflow-y');
 let classButton = document.getElementsByClassName('button-g-table');
 
 
