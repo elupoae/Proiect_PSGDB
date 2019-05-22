@@ -12,7 +12,7 @@ class Application
         if (file_exists(CONTROLLER . $this->controller . '.php')) {
             $this->controller = new $this->controller;
             if (method_exists($this->controller, $this->action)) {
-                Database::setConnection();
+//                Database::setConnection();
                 call_user_func_array([$this->controller, $this->action], $this->params);
             }
         } else {

@@ -26,11 +26,11 @@
     <div class="container-admin" id="container">
         <div class="left-bar">
             <ul id="nav">
-                <li><a class="selected" href="index.phtml">Main Page</a></li>
-                <li><a href="buy-ticket.phtml">Buy Ticket</a></li>
-                <li><a href="employees.phtml">Employees</a></li>
-                <li><a href="trains.phtml">Trains</a></li>
-                <li><a href="stations.phtml">Stations</a></li>
+                <li><a class="selected" href="/home">Main Page</a></li>
+                <li><a href="/home/buy_ticket">Buy Ticket</a></li>
+                <li><a href="/home/employees">Employees</a></li>
+                <li><a href="/home/trains">Trains</a></li>
+                <li><a href="/home/stations">Stations</a></li>
             </ul>
         </div>
         <div class="content">
@@ -56,12 +56,10 @@
                         <label for="choose-new-train">Select ID train:</label>
                         <select data-placeholder="Select ID train..." class="chosen" id="choose-new-train" required>
                             <option value=""></option>
-                            <option value="IR-1842">IR-1842</option>
-                            <option value="IR-1846">IR-1846</option>
-                            <option value="R-1423">R-1423</option>
-                            <option value="IR-1842">IR-1842</option>
-                            <option value="R-1423">R-1423</option>
-                            <option value="R-1423">R-1423</option>
+                            <?php foreach ($this->data['trains'] as $item)
+                            { ?>
+                                <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                            <?php } ?>
                         </select>
                         <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
                         <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
@@ -74,8 +72,10 @@
                             <label for="choose-emp1">Select employee</label>
                             <select data-placeholder="Select employee..." class="chosen" id="choose-emp1" required>
                                 <option value=""></option>
-                                <option value="Lupoae Eduard">Lupoae Eduard</option>
-                                <option value="Lupoae Eduard">Lupoae Eduard</option>
+                                <?php foreach ($this->data['angajati'] as $item)
+                                { ?>
+                                    <option value="<?= $item['id_angajat'] ?>"><?= $item['nume_angajat'] ?></option>
+                                <?php } ?>
                             </select>
                             <label for="phone">Phone:</label>
                             <input class="input-g" id="phone" type="text" required>
@@ -89,18 +89,18 @@
                             <label for="choose-emp2">Select employee</label>
                             <select data-placeholder="Select employee..." class="chosen" id="choose-emp2" required>
                                 <option value=""></option>
-                                <option value="Lupoae Eduard">Lupoae Eduard</option>
-                                <option value="Lupoae Eduard">Lupoae Eduard</option>
+                                <?php foreach ($this->data['angajati'] as $item)
+                                { ?>
+                                    <option value="<?= $item['id_angajat'] ?>"><?= $item['nume_angajat'] ?></option>
+                                <?php } ?>
                             </select>
                             <label for="choose-emp-train">Select train</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="choose-emp-train" required>
                                 <option value=""></option>
-                                <option value="IR-1842">IR-1842</option>
-                                <option value="IR-1846">IR-1846</option>
-                                <option value="R-1423">R-1423</option>
-                                <option value="IR-1842">IR-1842</option>
-                                <option value="R-1423">R-1423</option>
-                                <option value="R-1423">R-1423</option>
+                                <?php foreach ($this->data['trains'] as $item)
+                                { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                                <?php } ?>
                             </select>
                             <div class="error-msg">Error: 404: update fail!</div>
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
@@ -121,46 +121,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="column">1</td>
-                        <td class="column">Lupoae Eduard</td>
-                        <td class="column">0743536271</td>
-                        <td class="column">IR-1843</td>
-                        <td class="column">Controller</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">16</td>
-                        <td class="column">Lupoae Eduard</td>
-                        <td class="column">0743536271</td>
-                        <td class="column">IR-1843</td>
-                        <td class="column">Conductor</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">2</td>
-                        <td class="column">Lupoae Eduard</td>
-                        <td class="column">0743536271</td>
-                        <td class="column">IR-1843</td>
-                        <td class="column">Controller</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">3</td>
-                        <td class="column">Lupoae Eduard</td>
-                        <td class="column">0743536271</td>
-                        <td class="column">IR-1843</td>
-                        <td class="column">Controller</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">4</td>
-                        <td class="column">Lupoae Eduard</td>
-                        <td class="column">0743536271</td>
-                        <td class="column">IR-1843</td>
-                        <td class="column">Controller</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
+                    <?php foreach ($this->data['angajati'] as $item)
+                    { ?>
+                        <tr>
+                            <td class="column"><?= $item['id_angajat'] ?></td>
+                            <td class="column"><?= $item['nume_angajat'] ?></td>
+                            <td class="column"><?= $item['phone'] ?></td>
+                            <td class="column"><?= $item['tren'] ?></td>
+                            <td class="column"><?= $item['job'] ?></td>
+                            <td class="column-delete">DELETE</td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
                 <br>

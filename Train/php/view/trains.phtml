@@ -25,11 +25,11 @@
     <div class="container-admin" id="container">
         <div class="left-bar">
             <ul id="nav">
-                <li><a class="selected" href="index.phtml">Main Page</a></li>
-                <li><a href="buy-ticket.phtml">Buy Ticket</a></li>
-                <li><a href="employees.phtml">Employees</a></li>
-                <li><a href="trains.phtml">Trains</a></li>
-                <li><a href="stations.phtml">Stations</a></li>
+                <li><a class="selected" href="/home">Main Page</a></li>
+                <li><a href="/home/buy_ticket">Buy Ticket</a></li>
+                <li><a href="/home/employees">Employees</a></li>
+                <li><a href="/home/trains">Trains</a></li>
+                <li><a href="/home/stations">Stations</a></li>
             </ul>
         </div>
         <div class="content">
@@ -42,33 +42,28 @@
                     <div class="add-trains">
                         <h3 class="title">Add trains</h3>
                         <form class="choose-route">
-                            <label for="add-tr">ID train:</label>
-                            <input class="input-g" id="add-tr" required>
-
                             <label for="ch-dep-tr">Station departure:</label>
                             <select data-placeholder="Station departure..." class="chosen" id="ch-dep-tr" required>
                                 <option value=""></option>
                                 <?php
-                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                                    foreach ($row as $item) {
-                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
-                                        print '<option value= $value >' . $value . '</option>';
-                                    }
-                                }
-                                ?>
+                                foreach ($this->data['stations'] as $item)
+                                {
+                                    ?>
+                                    <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
+
+                                <?php } ?>
                             </select>
 
                             <label for="ch-arr-tr">Station arrive:</label>
                             <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-tr" required>
                                 <option value=""></option>
                                 <?php
-                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                                    foreach ($row as $item) {
-                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
-                                        print '<option value= $value >' . $value . '</option>';
-                                    }
-                                }
-                                ?>
+                                foreach ($this->data['stations'] as $item)
+                                {
+                                    ?>
+                                    <option value="<?= $item['id_statie'] ?>"><?= $item['nume_statie'] ?></option>
+
+                                <?php } ?>
                             </select>
 
                             <label for="add-time">Time duration:</label>
@@ -84,14 +79,10 @@
                             <label for="ch-carload">Id train:</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="ch-carload" required>
                                 <option value=""></option>
-                                <?php
-                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                                    foreach ($row as $item) {
-                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
-                                        print '<option value= $value >' . $value . '</option>';
-                                    }
-                                }
-                                ?>
+                                <?php foreach ($this->data['trains'] as $item)
+                                { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                                <?php } ?>
                             </select>
 
                             <label for="type-car">Type carload:</label>
@@ -112,14 +103,10 @@
                             <label for="ch-carload">Id train:</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="ch-status" required>
                                 <option value=""></option>
-                                <?php
-                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                                    foreach ($row as $item) {
-                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
-                                        print '<option value= $value >' . $value . '</option>';
-                                    }
-                                }
-                                ?>
+                                <?php foreach ($this->data['trains'] as $item)
+                                { ?>
+                                    <option value="<?= $item['id_tren'] ?>"><?= $item['type'] ?>-<?= $item['id_tren'] ?></option>
+                                <?php } ?>
                             </select>
 
                             <label for="status">Status:</label>
@@ -147,20 +134,25 @@
                         <th>Number employees</th>
                         <th>Status</th>
                         <th>Status time</th>
+                        <th>Last station</th>
                         <th>Option</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php
-                    while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                        print '<tr>';
-                        foreach ($row as $item) {
-                            print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
-                        }
-                        print '<td class="column-delete">DELETE</td>';
-                        print '</tr>';
-                    }
-                    ?>
+                    <?php foreach ($this->data['trains'] as $item)
+                    { ?>
+                        <tr>
+                            <td class="column"><?= $item['id_tren'] ?></td>
+                            <td class="column"><?= $item['type'] ?></td>
+                            <td class="column"><?= $item['nr_vagoane'] ?></td>
+                            <td class="column"><?= $item['nr_locuri'] ?></td>
+                            <td class="column"><?= $item['nr_angajati'] ?></td>
+                            <td class="column"><?= $item['status'] ?></td>
+                            <td class="column"><?= $item['status_time'] ?></td>
+                            <td class="column"><?= $item['last_station'] ?></td>
+                            <td class="column-delete">DELETE</td>
+                        </tr>
+                    <?php } ?>
                     <tr>
                         <td class="column">4</td>
                         <td class="column">TR-1834</td>
@@ -188,23 +180,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php
-                    while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                        print '<tr>';
-                        foreach ($row as $item) {
-                            print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
-                        }
-                        print '<td class="column-delete">DELETE</td>';
-                        print '</tr>';
-                    }
-                    ?>
-                    <tr>
-                        <td class="column">6</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">1</td>
-                        <td class="column">230</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
+                    <?php foreach ($this->data['valgoane'] as $item)
+                    { ?>
+                        <tr>
+                            <td class="column"><?= $item['id_vagon'] ?></td>
+                            <td class="column"><?= $item['id_tren'] ?></td>
+                            <td class="column"><?= $item['clasa'] ?></td>
+                            <td class="column"><?= $item['nr_locuri'] ?></td>
+                            <td class="column-delete">DELETE</td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
                 <br>
