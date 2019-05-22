@@ -40,21 +40,21 @@
             <div class="container-up-add">
                 <div id="add-emp">
                     <h3 class="title">Add new employee</h3>
-                    <form class="choose-route" style="margin-top: 50px">
+                    <form class="choose-route" style="margin-top: 50px" action="employee/add" method="post">
                         <label for="first-name">First name:</label>
-                        <input class="input-g" id="first-name" type="text" required>
+                        <input name="first_name" class="input-g" id="first-name" type="text" required>
                         <label for="last-name">Last name:</label>
-                        <input class="input-g" id="last-name" type="text" required>
+                        <input name="last_name" class="input-g" id="last-name" type="text" required>
                         <label for="phone-number">Phone number:</label>
-                        <input class="input-g" id="phone-number" type="text" required>
+                        <input name="phone" class="input-g" id="phone-number" type="text" required>
                         <label for="choose-job">Select job status:</label>
-                        <select data-placeholder="Select job status..." class="chosen" id="choose-job" required>
+                        <select name="job" data-placeholder="Select job status..." class="chosen" id="choose-job" required>
                             <option value=""></option>
                             <option value="Controller">Controller</option>
                             <option value="Conductor">Conductor</option>
                         </select>
                         <label for="choose-new-train">Select ID train:</label>
-                        <select data-placeholder="Select ID train..." class="chosen" id="choose-new-train" required>
+                        <select name="id_train" data-placeholder="Select ID train..." class="chosen" id="choose-new-train" required>
                             <option value=""></option>
                             <?php foreach ($this->data['trains'] as $item)
                             { ?>

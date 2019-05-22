@@ -41,9 +41,9 @@
                 <div class="add-zone">
                     <div class="add-trains">
                         <h3 class="title">Add trains</h3>
-                        <form class="choose-route">
+                        <form class="choose-route" action="/train/add_train" method="post">
                             <label for="ch-dep-tr">Station departure:</label>
-                            <select data-placeholder="Station departure..." class="chosen" id="ch-dep-tr" required>
+                            <select name="plecare" data-placeholder="Station departure..." class="chosen" id="ch-dep-tr" required>
                                 <option value=""></option>
                                 <?php
                                 foreach ($this->data['stations'] as $item)
@@ -55,7 +55,7 @@
                             </select>
 
                             <label for="ch-arr-tr">Station arrive:</label>
-                            <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-tr" required>
+                            <select name="sosire" data-placeholder="Station arrive..." class="chosen" id="ch-arr-tr" required>
                                 <option value=""></option>
                                 <?php
                                 foreach ($this->data['stations'] as $item)
@@ -67,7 +67,7 @@
                             </select>
 
                             <label for="add-time">Time duration:</label>
-                            <input class="input-g" id="add-time" required>
+                            <input class="input-g" id="add-time" name="time" required>
 
                             <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
@@ -75,9 +75,9 @@
                     </div>
                     <div class="add-carloads">
                         <h3 class="title">Add carloads</h3>
-                        <form class="choose-route">
+                        <form class="choose-route" action="/train/add_carload" method="post">
                             <label for="ch-carload">Id train:</label>
-                            <select data-placeholder="Select ID train..." class="chosen" id="ch-carload" required>
+                            <select name="train" data-placeholder="Select ID train..." class="chosen" id="ch-carload" required>
                                 <option value=""></option>
                                 <?php foreach ($this->data['trains'] as $item)
                                 { ?>
@@ -86,10 +86,10 @@
                             </select>
 
                             <label for="type-car">Type carload:</label>
-                            <input class="input-g" id="type-car" required>
+                            <input name="type" class="input-g" id="type-car" required>
 
                             <label for="nr-seats">Number of seats:</label>
-                            <input class="input-g" id="nr-seats" required type="number">
+                            <input name="nr_seats" class="input-g" id="nr-seats" required type="number">
 
                             <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
                             <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
@@ -99,9 +99,9 @@
                 <div class="update-zone">
                     <div class="update-status">
                         <h3 class="title">Update status</h3>
-                        <form class="choose-route">
+                        <form class="choose-route" action="/train/update_status" method="post">
                             <label for="ch-carload">Id train:</label>
-                            <select data-placeholder="Select ID train..." class="chosen" id="ch-status" required>
+                            <select name="train" data-placeholder="Select ID train..." class="chosen" id="ch-status" required>
                                 <option value=""></option>
                                 <?php foreach ($this->data['trains'] as $item)
                                 { ?>
