@@ -39,31 +39,33 @@
                 <hr>
             </div>
             <div class="input-hidden">
-                <div class="input-zone" id="train-route">
+                <div class="input-zone" id="train-route" style="display: block">
                     <h3 class="title">Train route</h3>
                     <form class="choose-route">
                         <label for="choose-departure">Station departure:</label>
                         <select data-placeholder="Station departure..." class="chosen" id="choose-departure" required>
                             <option value=""></option>
-                            <option value="Galati">Galati</option>
-                            <option value="Liesti">Liesti</option>
-                            <option value="Tecuci">Tecuci</option>
-                            <option value="Barlad">Barlad</option>
-                            <option value="Vaslui">Vaslui</option>
-                            <option value="Nicolina">Nicolina</option>
-                            <option value="Iasi">Iasi</option>
+                            <?php
+                            while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                foreach ($row as $item) {
+                                    $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                    print '<option value= $value >' . $value . '</option>';
+                                }
+                            }
+                            ?>
                         </select>
 
                         <label for="choose-arrive">Station arrive:</label>
                         <select data-placeholder="Station arrive..." class="chosen" id="choose-arrive" required>
                             <option value=""></option>
-                            <option value="Galati">Galati</option>
-                            <option value="Liesti">Liesti</option>
-                            <option value="Tecuci">Tecuci</option>
-                            <option value="Barlad">Barlad</option>
-                            <option value="Vaslui">Vaslui</option>
-                            <option value="Nicolina">Nicolina</option>
-                            <option value="Iasi">Iasi</option>
+                            <?php
+                            while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                foreach ($row as $item) {
+                                    $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                    print '<option value= $value >' . $value . '</option>';
+                                }
+                            }
+                            ?>
                         </select>
                         <label for="start">Departure date:</label>
                         <input type="date" id="start" name="trip-start"
@@ -83,7 +85,7 @@
                     </form>
                 </div>
 
-                <div class="input-zone" id="complete-date" style="display: block">
+                <div class="input-zone" id="complete-date" style="display: none">
                     <h3 class="title">Form date client</h3>
                     <form class="choose-route" style="margin-top: 50px">
                         <label for="cnp">CNP:</label>
@@ -91,83 +93,87 @@
                         <label for="legit">Legitimation:</label>
                         <input class="input-g" id="legit" type="text">
                         <div class="error-msg">Error: nu am reusit sa cumpar biletul</div>
-                        <button class="button-g" type="submit" style="margin-left: 195px">Submit</button>
+                        <div class="button-zone" style="display: flex; flex-wrap: wrap; justify-content: space-around">
+                            <button class="button-g" type="submit" id="back-button">Back</button>
+                            <button class="button-g" type="submit">Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
             <div class="info-zone">
-                <div class="routes-found">
-                    <div class="route-show">
-                        <div class="route-inf"><p class="p-i">Route:</p>
-                            <p>Galati -> Iasi</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Interval:</p>
-                            <p>12:03 -> 15:32</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
-                            <p>35lei / 10lei</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Nr.Train</p>
-                            <p>IR-1214</p></div>
+                <div class="all-route-found" id="all-route-found">
+                    <div class="routes-found">
+                        <div class="route-show">
+                            <div class="route-inf"><p class="p-i">Route:</p>
+                                <p>Galati -> Iasi</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Interval:</p>
+                                <p>12:03 -> 15:32</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                                <p>35lei / 10lei</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Nr.Train</p>
+                                <p>IR-1214</p></div>
+                        </div>
+                        <button class="button-g" type="button">Select</button>
                     </div>
-                    <button class="button-g" type="button">Select</button>
-                </div>
-                <div class="routes-found">
-                    <div class="route-show">
-                        <div class="route-inf"><p class="p-i">Route:</p>
-                            <p>Galati -> Iasi</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Interval:</p>
-                            <p>12:03 -> 15:32</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
-                            <p>35lei / 10lei</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Nr.Train</p>
-                            <p>IR-1214</p></div>
+                    <div class="routes-found">
+                        <div class="route-show">
+                            <div class="route-inf"><p class="p-i">Route:</p>
+                                <p>Galati -> Iasi</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Interval:</p>
+                                <p>12:03 -> 15:32</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                                <p>35lei / 10lei</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Nr.Train</p>
+                                <p>IR-1214</p></div>
+                        </div>
+                        <button class="button-g" type="button">Select</button>
                     </div>
-                    <button class="button-g" type="button">Select</button>
-                </div>
-                <div class="routes-found">
-                    <div class="route-show">
-                        <div class="route-inf"><p class="p-i">Route:</p>
-                            <p>Galati -> Iasi</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Interval:</p>
-                            <p>12:03 -> 15:32</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
-                            <p>35lei / 10lei</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Nr.Train</p>
-                            <p>IR-1214</p></div>
+                    <div class="routes-found">
+                        <div class="route-show">
+                            <div class="route-inf"><p class="p-i">Route:</p>
+                                <p>Galati -> Iasi</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Interval:</p>
+                                <p>12:03 -> 15:32</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                                <p>35lei / 10lei</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Nr.Train</p>
+                                <p>IR-1214</p></div>
+                        </div>
+                        <button class="button-g" type="button">Select</button>
                     </div>
-                    <button class="button-g" type="button">Select</button>
-                </div>
-                <div class="routes-found">
-                    <div class="route-show">
-                        <div class="route-inf"><p class="p-i">Route:</p>
-                            <p>Galati -> Iasi</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Interval:</p>
-                            <p>12:03 -> 15:32</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Price(Reduced):</p>
-                            <p>35lei / 10lei</p></div>
-                        <hr>
-                        <div class="route-inf"><p class="p-i">Nr.Train</p>
-                            <p>IR-1214</p></div>
+                    <div class="routes-found">
+                        <div class="route-show">
+                            <div class="route-inf"><p class="p-i">Route:</p>
+                                <p>Galati -> Iasi</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Interval:</p>
+                                <p>12:03 -> 15:32</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Price(Reduced):</p>
+                                <p>35lei / 10lei</p></div>
+                            <hr>
+                            <div class="route-inf"><p class="p-i">Nr.Train</p>
+                                <p>IR-1214</p></div>
+                        </div>
+                        <button class="button-g" type="button">Select</button>
                     </div>
-                    <button class="button-g" type="button">Select</button>
                 </div>
-
-
             </div>
         </div>
     </div>
 </div>
 <script src="../../javascript/responsive-menu.js"></script>
 <script src="../../javascript/chosen.js"></script>
-</body>w
+
+</body>
 </html>
 

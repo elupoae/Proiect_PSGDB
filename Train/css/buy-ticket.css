@@ -104,8 +104,6 @@ input#start {
     width: 120px;
 }
 
-
-
 @media screen and (max-width: 725px) {
     .info-zone {
         min-width: 300px;

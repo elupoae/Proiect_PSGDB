@@ -49,13 +49,14 @@
                             <label for="ch-dep-st">Station departure:</label>
                             <select data-placeholder="Station departure..." class="chosen" id="ch-dep-st" required>
                                 <option value=""></option>
-                                <option value="Galati">Galati</option>
-                                <option value="Liesti">Liesti</option>
-                                <option value="Tecuci">Tecuci</option>
-                                <option value="Barlad">Barlad</option>
-                                <option value="Vaslui">Vaslui</option>
-                                <option value="Nicolina">Nicolina</option>
-                                <option value="Iasi">Iasi</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="time-dep">Hour departure:</label>
@@ -64,13 +65,14 @@
                             <label for="ch-arr-st">Station arrive:</label>
                             <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-st" required>
                                 <option value=""></option>
-                                <option value="Galati">Galati</option>
-                                <option value="Liesti">Liesti</option>
-                                <option value="Tecuci">Tecuci</option>
-                                <option value="Barlad">Barlad</option>
-                                <option value="Vaslui">Vaslui</option>
-                                <option value="Nicolina">Nicolina</option>
-                                <option value="Iasi">Iasi</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="time-arr">Hour arrival:</label>
@@ -104,12 +106,14 @@
                             <label for="ch-up-rt">Id route:</label>
                             <select data-placeholder="Select ID route..." class="chosen" id="ch-up-rt" required>
                                 <option value=""></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="time-up-dep">Hour departure:</label>
@@ -131,15 +135,15 @@
                             <label for="ch-up-st">Station arrive:</label>
                             <select data-placeholder="Station update..." class="chosen" id="ch-up-st" required>
                                 <option value=""></option>
-                                <option value="Galati">Galati</option>
-                                <option value="Liesti">Liesti</option>
-                                <option value="Tecuci">Tecuci</option>
-                                <option value="Barlad">Barlad</option>
-                                <option value="Vaslui">Vaslui</option>
-                                <option value="Nicolina">Nicolina</option>
-                                <option value="Iasi">Iasi</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
-
                             <label for="time-up">New-time:</label>
                             <input class="input-g" id="time-up" required>
 
@@ -154,7 +158,6 @@
                 <button class="button-g-table" type="button">Stations</button>
                 <button class="button-g-table" type="button">Routes</button>
             </div>
-
             <div class="table" style="overflow-x:auto; display: block;">
                 <table>
                     <thead>
@@ -166,42 +169,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="column">1</td>
-                        <td class="column">Galati</td>
-                        <td class="column">10</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">2</td>
-                        <td class="column">Liesti</td>
-                        <td class="column">2</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">3</td>
-                        <td class="column">Tecuci</td>
-                        <td class="column">5</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">4</td>
-                        <td class="column">Barlad</td>
-                        <td class="column">6</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">5</td>
-                        <td class="column">Nicolina</td>
-                        <td class="column">3</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">6</td>
-                        <td class="column">Iasi</td>
-                        <td class="column">30</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
+                    <?php
+                    while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                        print '<tr>';
+                        foreach ($row as $item) {
+                            print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
+                        }
+                        print '<td class="column-delete">DELETE</td>';
+                        print '</tr>';
+                    }
+                    ?>
                     </tbody>
                 </table>
                 <br>

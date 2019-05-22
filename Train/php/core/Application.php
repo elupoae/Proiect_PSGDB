@@ -35,7 +35,7 @@ class Application
     public static function redirectTo($path = "")
     {
         if (empty($path)) {
-            header("Location: /home");
+            header("Location: ");
         } else header("Location: $path");
     }
 }

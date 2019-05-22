@@ -48,25 +48,27 @@
                             <label for="ch-dep-tr">Station departure:</label>
                             <select data-placeholder="Station departure..." class="chosen" id="ch-dep-tr" required>
                                 <option value=""></option>
-                                <option value="Galati">Galati</option>
-                                <option value="Liesti">Liesti</option>
-                                <option value="Tecuci">Tecuci</option>
-                                <option value="Barlad">Barlad</option>
-                                <option value="Vaslui">Vaslui</option>
-                                <option value="Nicolina">Nicolina</option>
-                                <option value="Iasi">Iasi</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="ch-arr-tr">Station arrive:</label>
                             <select data-placeholder="Station arrive..." class="chosen" id="ch-arr-tr" required>
                                 <option value=""></option>
-                                <option value="Galati">Galati</option>
-                                <option value="Liesti">Liesti</option>
-                                <option value="Tecuci">Tecuci</option>
-                                <option value="Barlad">Barlad</option>
-                                <option value="Vaslui">Vaslui</option>
-                                <option value="Nicolina">Nicolina</option>
-                                <option value="Iasi">Iasi</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="add-time">Time duration:</label>
@@ -82,12 +84,14 @@
                             <label for="ch-carload">Id train:</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="ch-carload" required>
                                 <option value=""></option>
-                                <option value="IR-1842">IR-1842</option>
-                                <option value="IR-1846">IR-1846</option>
-                                <option value="R-1423">R-1423</option>
-                                <option value="IR-1842">IR-1842</option>
-                                <option value="R-1423">R-1423</option>
-                                <option value="R-1423">R-1423</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="type-car">Type carload:</label>
@@ -108,12 +112,14 @@
                             <label for="ch-carload">Id train:</label>
                             <select data-placeholder="Select ID train..." class="chosen" id="ch-status" required>
                                 <option value=""></option>
-                                <option value="IR-1842">IR-1842</option>
-                                <option value="IR-1846">IR-1846</option>
-                                <option value="R-1423">R-1423</option>
-                                <option value="IR-1842">IR-1842</option>
-                                <option value="R-1423">R-1423</option>
-                                <option value="R-1423">R-1423</option>
+                                <?php
+                                while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                    foreach ($row as $item) {
+                                        $value = ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp');
+                                        print '<option value= $value >' . $value . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
 
                             <label for="status">Status:</label>
@@ -145,36 +151,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="column">1</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">4</td>
-                        <td class="column">230</td>
-                        <td class="column">6</td>
-                        <td class="column">ACTIVE</td>
-                        <td class="column">-10</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">2</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">4</td>
-                        <td class="column">230</td>
-                        <td class="column">6</td>
-                        <td class="column">ACTIVE</td>
-                        <td class="column">-10</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">3</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">4</td>
-                        <td class="column">230</td>
-                        <td class="column">6</td>
-                        <td class="column">ACTIVE</td>
-                        <td class="column">-10</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
+                    <?php
+                    while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                        print '<tr>';
+                        foreach ($row as $item) {
+                            print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
+                        }
+                        print '<td class="column-delete">DELETE</td>';
+                        print '</tr>';
+                    }
+                    ?>
                     <tr>
                         <td class="column">4</td>
                         <td class="column">TR-1834</td>
@@ -202,41 +188,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="column">1</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">1</td>
-                        <td class="column">230</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">2</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">1</td>
-                        <td class="column">230</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">3</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">1</td>
-                        <td class="column">230</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">4</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">1</td>
-                        <td class="column">230</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
-                    <tr>
-                        <td class="column">5</td>
-                        <td class="column">TR-1834</td>
-                        <td class="column">1</td>
-                        <td class="column">230</td>
-                        <td class="column-delete">DELETE</td>
-                    </tr>
+                    <?php
+                    while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                        print '<tr>';
+                        foreach ($row as $item) {
+                            print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
+                        }
+                        print '<td class="column-delete">DELETE</td>';
+                        print '</tr>';
+                    }
+                    ?>
                     <tr>
                         <td class="column">6</td>
                         <td class="column">TR-1834</td>
