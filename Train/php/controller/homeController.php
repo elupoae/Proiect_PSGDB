@@ -30,47 +30,41 @@ class homeController extends Controller
 
     public function employees()
     {
-        $data = [];
-        $data['angajati'] = [];
-        $data['trains'] = [];
-        $conn = Database::getConnection();
-        $query = 'select   e.ID,
-                           e.FIRST_NAME || \' \' || e.LAST_NAME,
-                           e.PHONE_NUMBER,
-                           TP.TYPE || \'-\' || t.ID,
-                           j.JOB
-                            from EMPLOYEE e
-                           join job j on e.ID = j.ID_EMPLOYEE
-                           join TRAIN T on j.ID_TRAIN = T.ID
-                           join TYPE_PRICE TP on T.ID_TYPE = TP.ID where rownum < 100';
-        $stid = oci_parse($conn, $query);
-        $r = oci_execute($stid);
-        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
-            $item = [];
-            $item['id_angajat'] = $row[0];
-            $item['nume_angajat'] = $row[1];
-            $item['phone'] = $row[2];
-            $item['tren'] = $row[3];
-            $item['job'] = $row[4];
-            array_push($data['angajati'], $item);
-        }
-        $query = 'select t.id, p.type from train t join type_price p on p.id=t.id_type where rownum < 100';
-        $stid = oci_parse($conn, $query);
-        $r = oci_execute($stid);
-        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
-            $item = [];
-            $item['id_tren'] = $row[0];
-            $item['type'] = $row[1];
-            array_push($data['trains'], $item);
-        }
+//        $data = [];
+//        $data['angajati'] = [];
+//        $data['trains'] = [];
+//        $conn = Database::getConnection();
+//        $query = 'select   e.ID,
+//                           e.FIRST_NAME || \' \' || e.LAST_NAME,
+//                           e.PHONE_NUMBER,
+//                           TP.TYPE || \'-\' || t.ID,
+//                           j.JOB
+//                            from EMPLOYEE e
+//                           join job j on e.ID = j.ID_EMPLOYEE
+//                           join TRAIN T on j.ID_TRAIN = T.ID
+//                           join TYPE_PRICE TP on T.ID_TYPE = TP.ID where rownum < 100';
+//        $stid = oci_parse($conn, $query);
+//        $r = oci_execute($stid);
+//        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
+//            $item = [];
+//            $item['id_angajat'] = $row[0];
+//            $item['nume_angajat'] = $row[1];
+//            $item['phone'] = $row[2];
+//            $item['tren'] = $row[3];
+//            $item['job'] = $row[4];
+//            array_push($data['angajati'], $item);
+//        }
+//        $query = 'select t.id, p.type from train t join type_price p on p.id=t.id_type where rownum < 100';
+//        $stid = oci_parse($conn, $query);
+//        $r = oci_execute($stid);
+//        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
+//            $item = [];
+//            $item['id_tren'] = $row[0];
+//            $item['type'] = $row[1];
+//            array_push($data['trains'], $item);
+//        }
 
         $this->view('employees', $data);
-        $this->view->render();
-    }
-
-    public function stations()
-    {
-        $this->view('stations');
         $this->view->render();
     }
 
@@ -121,6 +115,27 @@ from TRAIN t join TYPE_PRICE p on p.id=t.id_type join status s on s.id_train=t.i
         }
 
         $this->view('trains', $data);
+        $this->view->render();
+    }
+
+
+    public function stations()
+    {
+        $data = [];
+        $data['stations'] = [];
+        $data['routes'] = [];
+        $conn = Database::getConnection();
+        $query = 'select ID,NAME_STATION from station';
+        $stid = oci_parse($conn, $query);
+        $r = oci_execute($stid);
+        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_ASSOC)) {
+            $item = [];
+            $item['id_statie'] = html_entity_decode($row['ID']);
+            $item['nume_statie'] = htmlentities($row['NAME_STATION']);
+            array_push($data['stations'], $item);
+        }
+
+        $this->view('stations', $data);
         $this->view->render();
     }
 //
