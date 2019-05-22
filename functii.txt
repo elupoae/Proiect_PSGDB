@@ -1,0 +1,221 @@
+create or replace FUNCTION ADAUGA_ANGAJAT 
+(
+  P_NUME IN VARCHAR2 
+, P_PRENUME IN VARCHAR2 
+, P_TELEFON IN VARCHAR2 
+) RETURN NUMBER AS 
+v_count NUMBER;
+BEGIN
+  SELECT count(*)+1 into v_count from EMPLOYEE;
+  INSERT INTO EMPLOYEE (id, FIRST_NAME, LAST_NAME, PHONE_NUMBER) VALUES (v_count, p_prenume, p_nume, P_TELEFON);
+  RETURN v_count;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END ADAUGA_ANGAJAT;
+
+create or replace FUNCTION ADAUGA_PERSOANA 
+(
+  P_CNP IN NUMBER 
+, P_LEGITIMATIE IN NUMBER
+) RETURN NUMBER AS 
+v_count NUMBER;
+BEGIN
+  SELECT count(*)+1 into v_count from PERSON;
+  INSERT INTO PERSON (id, cnp, LEGITIMATION) VALUES (v_count, p_cnp, P_LEGITIMATIE);
+  RETURN v_count;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END ADAUGA_PERSOANA;
+
+create or replace FUNCTION ADAUGA_TRASEU 
+(
+  P_TREN IN NUMBER 
+, P_STATIE_PLECARE IN NUMBER 
+, P_STATIE_DESTINATIE IN NUMBER 
+, P_ORA_PLECARE IN TIMESTAMP 
+, P_ORA_SOSIRE IN TIMESTAMP 
+, P_DISTANTA IN NUMBER 
+) RETURN NUMBER AS 
+v_count NUMBER;
+BEGIN
+  SELECT count(*)+1 into v_count from ROUTE;
+  INSERT INTO ROUTE (id, id_train, ID_DEPARTURE, ID_ARRIVAL, HOUR_DEPARTURE, HOUR_ARRIVAL, DISTANCE) 
+            VALUES (v_count, P_TREN, P_STATIE_PLECARE, P_STATIE_DESTINATIE, P_ORA_PLECARE, P_ORA_SOSIRE, P_DISTANTA);
+  RETURN v_count;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END ADAUGA_TRASEU;
+
+create or replace FUNCTION ADAUGA_TREN 
+(
+  P_TIP IN NUMBER 
+) RETURN NUMBER AS 
+v_count NUMBER;
+BEGIN
+  SELECT count(*)+1 into v_count from train;
+  INSERT INTO train (id, id_type) VALUES (v_count, p_tip);
+  RETURN v_count;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END ADAUGA_TREN;
+
+create or replace FUNCTION ADAUGA_VAGON 
+(
+  P_TREN IN NUMBER 
+, P_CLASA IN NUMBER 
+, P_NR_LOCURI IN NUMBER 
+) RETURN NUMBER AS 
+v_count NUMBER;
+BEGIN
+  SELECT count(*)+1 into v_count from CARLOAD;
+  INSERT INTO CARLOAD (id, id_train, number_seats, class_type) VALUES (v_count, p_tren, p_nr_locuri, p_clasa);
+  RETURN v_count;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END ADAUGA_VAGON;
+
+create or replace FUNCTION CALC_DISTANTA 
+(
+  P_TREN IN NUMBER 
+, P_PLECARE IN NUMBER 
+, P_DESTINATIE IN NUMBER 
+) RETURN NUMBER AS 
+v_distanta NUMBER;
+v_destinatie NUMBER;
+BEGIN
+  v_destinatie := p_plecare;
+    LOOP
+      SELECT ID_ARRIVAL, distance + v_distanta into v_destinatie, v_distanta FROM ROUTE WHERE ID_TRAIN=P_TREN AND ID_DEPARTURE = v_destinatie;
+      if v_destinatie = p_destinatie then
+        return v_distanta;
+      end if;
+    END LOOP;
+    return 0;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END CALC_DISTANTA;
+
+create or replace FUNCTION CALC_DURATA 
+(
+  P_TREN IN NUMBER 
+, P_PLECARE IN NUMBER 
+, P_DESTINATIE IN NUMBER 
+) RETURN NUMBER AS 
+v_durata NUMBER;
+v_ora_plecare TIMESTAMP;
+v_ora_sosire TIMESTAMP;
+BEGIN
+    SELECT hour_departure into v_ora_plecare from ROUTE WHERE ID_TRAIN = p_tren AND ID_DEPARTURE = P_PLECARE;
+    SELECT HOUR_ARRIVAL into v_ora_sosire from ROUTE WHERE ID_TRAIN = p_tren AND ID_DEPARTURE = P_DESTINATIE;
+    SELECT extract( hour from diff )*60 + extract(minute from diff) into v_durata 
+                    from (SELECT (v_ora_sosire - v_ora_plecare) as diff from dual);
+  RETURN v_durata;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END CALC_DURATA;
+
+create or replace FUNCTION CUMPARARE_BILET 
+(
+  P_PERSOANA IN NUMBER 
+, P_TREN IN NUMBER 
+, P_DATE IN DATE 
+, P_CLASA IN NUMBER 
+) RETURN NUMBER AS 
+v_count NUMBER;
+v_vagon NUMBER;
+BEGIN
+  SELECT count(*)+1 into v_count from TICKET;
+  SELECT "id" into v_vagon FROM (SELECT c.id as "id",number_seats-(SELECT count(*) from TICKET t where t.id_carload = c.id) as liber  FROM carload c where c.id_train = p_tren) WHERE liber > 0 AND ROWNUM < 2 ORDER BY liber;
+  INSERT INTO TICKET (id, ID_PERSON, ID_CARLOAD, DATE_TRAVEL) VALUES (v_count, p_persoana, v_vagon, p_date);
+  RETURN v_count;
+EXCEPTION
+  WHEN no_data_found THEN
+    return -2;
+  WHEN DUP_VAL_ON_INDEX THEN
+    return -1;
+  WHEN OTHERS THEN
+    return 0;
+END CUMPARARE_BILET;
+
+create or replace FUNCTION NR_LOCURI_LIBERE 
+(
+  P_TREN IN NUMBER 
+) RETURN NUMBER AS 
+v_total NUMBER;
+v_ocupat NUMBER;
+BEGIN
+  SELECT sum(number_seats) into v_total from CARLOAD WHERE ID_TRAIN = p_tren;
+  SELECT count(*) into v_ocupat FROM TICKET t join CARLOAD c on c.ID = t.ID_CARLOAD WHERE c.ID_TRAIN = p_tren;
+  RETURN v_total - v_ocupat;
+END NR_LOCURI_LIBERE;
+
+create or replace TYPE ORAR_ROW AS OBJECT 
+( /* TODO enter attribute and method declarations here */ 
+  train NUMBER,
+  type varchar2(10),
+  departure NUMBER,
+  arrival NUMBER,
+  duration NUMBER
+);
+
+create or replace TYPE ORAR_TABLE 
+AS TABLE OF orar_row;
+
+create or replace FUNCTION ORAR RETURN orar_table AS 
+CURSOR lista_trasee IS SELECT r.id_train as "tren", t.type as "type", s1.name_station as "plecare", s2.name_station as "destinatie", CALC_DURATA(r.id_train, s1.id, s2.id) as "durata"
+                FROM ROUTE r join TYPE_PRICE t on t.id=r.id_train join STATION s1 on s1.id=r.ID_DEPARTURE join STATION s2 on s2.ID=r.ID_ARRIVAL;
+v_orar orar_table;
+BEGIN
+  FOR v_linie IN lista_trasee LOOP
+    v_orar.extend();
+    v_orar(v_orar.count) := orar_row(v_linie."tren", v_linie."type", v_linie."plecare", v_linie."destinatie", v_linie."durata");
+  END LOOP;
+  RETURN v_orar;
+END ORAR;
+
+create or replace FUNCTION VERIFICARE_PERSOANA 
+(
+  P_PERSOANA IN NUMBER 
+, P_ORA_PLECARE IN NUMBER 
+, P_ORA_SOSIRE IN NUMBER 
+) RETURN NUMBER AS 
+CURSOR lista_rezervari IS SELECT HOUR_DEPARTURE, HOUR_ARRIVAL FROM route r join CARLOAD c on c.id_train=r.ID_TRAIN join TICKET t on t.ID_CARLOAD=c.ID;
+BEGIN
+  
+  RETURN NULL;
+END VERIFICARE_PERSOANA;
