@@ -30,39 +30,39 @@ class homeController extends Controller
 
     public function employees()
     {
-//        $data = [];
-//        $data['angajati'] = [];
-//        $data['trains'] = [];
-//        $conn = Database::getConnection();
-//        $query = 'select   e.ID,
-//                           e.FIRST_NAME || \' \' || e.LAST_NAME,
-//                           e.PHONE_NUMBER,
-//                           TP.TYPE || \'-\' || t.ID,
-//                           j.JOB
-//                            from EMPLOYEE e
-//                           join job j on e.ID = j.ID_EMPLOYEE
-//                           join TRAIN T on j.ID_TRAIN = T.ID
-//                           join TYPE_PRICE TP on T.ID_TYPE = TP.ID where rownum < 100';
-//        $stid = oci_parse($conn, $query);
-//        $r = oci_execute($stid);
-//        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
-//            $item = [];
-//            $item['id_angajat'] = $row[0];
-//            $item['nume_angajat'] = $row[1];
-//            $item['phone'] = $row[2];
-//            $item['tren'] = $row[3];
-//            $item['job'] = $row[4];
-//            array_push($data['angajati'], $item);
-//        }
-//        $query = 'select t.id, p.type from train t join type_price p on p.id=t.id_type where rownum < 100';
-//        $stid = oci_parse($conn, $query);
-//        $r = oci_execute($stid);
-//        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
-//            $item = [];
-//            $item['id_tren'] = $row[0];
-//            $item['type'] = $row[1];
-//            array_push($data['trains'], $item);
-//        }
+        $data = [];
+        $data['angajati'] = [];
+        $data['trains'] = [];
+        $conn = Database::getConnection();
+        $query = 'select   e.ID,
+                           e.FIRST_NAME || \' \' || e.LAST_NAME,
+                           e.PHONE_NUMBER,
+                           TP.TYPE || \'-\' || t.ID,
+                           j.JOB
+                            from EMPLOYEE e
+                           join job j on e.ID = j.ID_EMPLOYEE
+                           join TRAIN T on j.ID_TRAIN = T.ID
+                           join TYPE_PRICE TP on T.ID_TYPE = TP.ID where rownum < 100';
+        $stid = oci_parse($conn, $query);
+        $r = oci_execute($stid);
+        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
+            $item = [];
+            $item['id_angajat'] = $row[0];
+            $item['nume_angajat'] = $row[1];
+            $item['phone'] = $row[2];
+            $item['tren'] = $row[3];
+            $item['job'] = $row[4];
+            array_push($data['angajati'], $item);
+        }
+        $query = 'select t.id, p.type from train t join type_price p on p.id=t.id_type where rownum < 100';
+        $stid = oci_parse($conn, $query);
+        $r = oci_execute($stid);
+        while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS + OCI_BOTH)) {
+            $item = [];
+            $item['id_tren'] = $row[0];
+            $item['type'] = $row[1];
+            array_push($data['trains'], $item);
+        }
 
         $this->view('employees', $data);
         $this->view->render();

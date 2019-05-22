@@ -14,6 +14,8 @@ class employeeController
             http_response_code(400);
             return;
         }
+//        $conn = Database::getConnection();
+
         var_dump($_POST);
 //        $_POST['subject'];$_POST['message'];
     }
